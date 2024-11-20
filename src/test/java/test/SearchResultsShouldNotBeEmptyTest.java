@@ -21,7 +21,7 @@ public class SearchResultsShouldNotBeEmptyTest extends TestBase {
 
     @CsvSource(value = {
             "мужская| футболка",
-            "женская| футболка"
+            "женские| джинсы"
     },delimiter = '|')
     @ParameterizedTest(name = "Для поискового запроса заголовок результата поиска должен содержать слово {0}")
     void searchResultsGenderNotBeEmpty(String gender, String searchQuery) {
