@@ -10,10 +10,11 @@ public class TestBase {
 
     @BeforeAll
     static void precondition(){
-        Configuration.baseUrl = "https://www.wildberries.ru/";
+        Configuration.baseUrl = "https://www.afanasy.ru/";
         Configuration.browserPosition = "0x0";
         Configuration.browserSize = "2560x1600";
         Configuration.pageLoadStrategy = "eager";
+        Configuration.holdBrowserOpen = false;
     }
 
     @AfterEach

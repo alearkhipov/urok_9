@@ -8,35 +8,36 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class SearchResultsShouldNotBeEmptyTest extends TestBase {
 
     @ValueSource(strings = {
-            "джинсы", "кепки", "куртки"
+            "квас", "пиво", "снеки"
     })
-    @ParameterizedTest(name = "Для поискового запроса {0} заголовок результата поиска должен содержать слово {0}")
-    //@Tag("BLOCKER")
+    @ParameterizedTest(name = "Для поискового запроса {0} результат поиска должен содержать слово {0}")
     void searchResultsTitleNotBeEmpty(String searchQuery) {
         startPages
                 .openMainPage()
                 .searchSomething(searchQuery)
-                .crumbsProduct(searchQuery);
+                .searchPage(searchQuery);
     }
 
     @CsvSource(value = {
-            "мужская| футболка",
-            "женские| джинсы"
-    },delimiter = '|')
-    @ParameterizedTest(name = "Для поискового запроса заголовок результата поиска должен содержать слово {0}")
-    void searchResultsGenderNotBeEmpty(String gender, String searchQuery) {
+            "Пиво, Ординарное: простое пиво с русским характером",
+            "Квас, Квас «Бочковой»",
+            "Снеки, Ломтики мясные и рыбные – любимые снеки в новой упаковке"
+    })
+    @ParameterizedTest(name = "Для поискового запроса {0} в первой карточке должен быть заголовок {1}")
+    void searchResultsTitleNotBeEmpty(String searchQuery, String expectedText) {
         startPages
                 .openMainPage()
-                .searchSomethingNew(gender, searchQuery)
-                    .crumbsGender(gender);
+                .searchSomething(searchQuery)
+                .searchTitle(expectedText);
+
     }
 
-    @CsvFileSource(resources = "/test_data/searchResultsGenderNotBeEmptyCsv.csv")
-    @ParameterizedTest(name = "Для поискового запроса заголовок результата поиска должен содержать слово {0}")
-    void searchResultsGenderNotBeEmptyCsv(String gender, String searchQuery) {
+    @CsvFileSource(resources = "/test_data/searchResultsTitleNotBeEmpty.csv")
+    @ParameterizedTest(name = "Для поискового запроса {0} в первой карточке должен быть текст {1}")
+    void searchResultsTitleNotBeEmptyCsv(String searchQuery, String expectedText) {
         startPages
                 .openMainPage()
-                .searchSomethingNew(gender, searchQuery)
-                .crumbsGender(gender);
+                .searchSomething(searchQuery)
+                .searchResultText(expectedText);
     }
 }
