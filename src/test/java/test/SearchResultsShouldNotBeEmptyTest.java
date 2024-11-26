@@ -49,7 +49,7 @@ public class SearchResultsShouldNotBeEmptyTest extends TestBase {
     }
 
     @EnumSource(Language.class)
-    @ParameterizedTest (name = "Для поискового запроса {0} должен быть текст")
+    @ParameterizedTest
     void afanasySiteShouldCorrectText(Language language){
         open("https://www.afanasy.ru/");
         $$(".top-head__switch a").find(text(language.name())).click();
