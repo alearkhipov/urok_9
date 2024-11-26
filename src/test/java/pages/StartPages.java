@@ -11,7 +11,6 @@ public class StartPages {
     public final SelenideElement searchTitle = $(".search__item");
     public final SelenideElement searchResultText = $(".search-descr");
 
-
     public StartPages openMainPage() {
         open("");
         return this;
@@ -24,12 +23,12 @@ public class StartPages {
         assertEquals (searchInput.getAttribute("value"),searchQuery);
         return this;
     }
-    public StartPages searchTitle(String expectedText) {
+    public StartPages searchResultTitle(String expectedText) {
         searchTitle.shouldHave(text(expectedText));
         return this;
     }
     public StartPages searchResultText(String expectedText) {
-        searchTitle.shouldHave(text(expectedText));
+        searchResultText.shouldHave(text(expectedText));
         return this;
     }
 }
