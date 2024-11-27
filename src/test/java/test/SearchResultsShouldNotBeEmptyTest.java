@@ -51,29 +51,34 @@ public class SearchResultsShouldNotBeEmptyTest extends TestBase {
     @EnumSource(Language.class)
     @ParameterizedTest
     void afanasySiteShouldCorrectText(Language language){
-        open("https://www.afanasy.ru/");
-        $$(".top-head__switch a").find(text(language.name())).click();
-        $("h2.main-video__title").shouldHave(text(language.description));
+        open("https://www.gazprom.ru/");
+        $$(".additional-links b, .additional-links a").find(text(language.name())).click();
+        $("#sites_link").shouldHave(text(language.description));
     }
 
     static Stream<Arguments>afanasySiteShouldCorrectButtons(){
         return Stream.of(
-                Arguments.of(
-                        Language.Рус,
-                        List.of("Компания", "Продукция", "Партнерам", "Работа у нас", "Новости", "Холдинг")
-                ),
-                Arguments.of(Language.Eng,
-                        List.of("COMPANY", "PRODUCTS", "PARTNERS", "WORK WITH US", "NEWS", "HOLDING")
+                Arguments.of
+                        (Language.RU,
+                                List.of("О «Газпроме»", "Акционерам и инвесторам", "Пресс-центр", "Проекты", "Устойчивое развитие", "Противодействие мошенничеству", "Контактная информация", "Реализация активов", "Карьера", "Закупки")
+                        ),
+                Arguments.of
+                        (Language.EN,
+                                List.of("About Gazprom", "Investors", "Media", "Projects", "Sustainable development", "Countering fraud", "Contact us")
+                        ),
+                Arguments.of
+                        (Language.DE,
+                         List.of("Über Gazprom", "Aktionäre und Investoren", "Pressezentrum", "Projekte", "Nachhaltige Entwicklung", "Betrugsbekämpfung", "Kontakt")
                 )
         );
     }
 
     @MethodSource
-    @ParameterizedTest
+    @ParameterizedTest (name = "Для поискового запроса {0} должен быть текст {1}")
     void afanasySiteShouldCorrectButtons(Language language, List<String> expectedButtons) {
-        open("https://www.afanasy.ru/");
-        $$(".top-head__switch a").find(text(language.name())).click();
-        $$("#bs-example-navbar-collapse-1 li").filter(visible).shouldHave(texts(expectedButtons));
+        open("https://www.gazprom.ru/");
+        $$(".additional-links b, .additional-links a").find(text(language.name())).click();
+        $$("[class='no_visited']").filter(visible).shouldHave(texts(expectedButtons));
     }
 
 }

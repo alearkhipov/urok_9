@@ -2,8 +2,9 @@ package data;
 
 public enum Language {
 
-    Рус("НИППЕЛЬ - НОВОЕ СЛОВО В ПИВОВАРЕНИИ!"),
-    Eng("NIPPEL - A NEW WORD IN BREWING!");
+    RU("Наши сайты"),
+    EN("Our websites"),
+    DE("Unsere Websites");
 
     public final String description;
 
